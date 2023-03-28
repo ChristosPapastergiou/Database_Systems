@@ -25,48 +25,34 @@ typedef struct{
     int hashBucket;         // Storing the int value of another block (E.g. we will visit block 10 -> block 4 -> block 1 because their hash is the same)
 }HT_block_info;
 
-/*Η συνάρτηση HT_CreateFile χρησιμοποιείται για τη δημιουργία
-και κατάλληλη αρχικοποίηση ενός άδειου αρχείου κατακερματισμού
-με όνομα fileName. Έχει σαν παραμέτρους εισόδου το όνομα του
-αρχείου στο οποίο θα κτιστεί ο σωρός και των αριθμό των κάδων
-της συνάρτησης κατακερματισμού. Σε περίπτωση που εκτελεστεί
-επιτυχώς, επιστρέφεται 0, ενώ σε διαφορετική περίπτωση -1.*/
+// create a file and proper initialization of an empty hash file with the name fileName
+// It takes as input parameters the name of the file in which to
+// build the heap and the number of buckets of the hash function
+// Return 0 if successfull, -1 if failure
 int HT_CreateFile(char *fileName, int buckets);
 
-/*Η συνάρτηση HT_OpenFile ανοίγει το αρχείο με όνομα filename
-και διαβάζει από το πρώτο μπλοκ την πληροφορία που αφορά το
-αρχείο κατακερματισμού. Κατόπιν, ενημερώνεται μια δομή που κρατάτε
-όσες πληροφορίες κρίνονται αναγκαίες για το αρχείο αυτό προκειμένου
-να μπορείτε να επεξεργαστείτε στη συνέχεια τις εγγραφές του. Αφού
-ενημερωθεί κατάλληλα η δομή πληροφοριών του αρχείου, την επιστρέφετε.
-Σε περίπτωση που συμβεί οποιοδήποτε σφάλμα, επιστρέφεται τιμή NULL.
-Αν το αρχείο που δόθηκε για άνοιγμα δεν αφορά αρχείο κατακερματισμού,
-τότε αυτό επίσης θεωρείται σφάλμα. */
+// Opens the file named filename and reads from the first block the information about the hashtable file
+// Then, a structure is updated that holds as much information as deemed necessary 
+// for this file in order to be able to edit then edit its records
+// In case of an error then it returns NULL
 HT_info* HT_OpenFile(char *fileName);
 
-/*Η συνάρτηση HT_CloseFile κλείνει το αρχείο που προσδιορίζεται μέσα
-στη δομή header_info. Σε περίπτωση που εκτελεστεί επιτυχώς, επιστρέφεται
-0, ενώ σε διαφορετική περίπτωση -1. Η συνάρτηση είναι υπεύθυνη και για την
-αποδέσμευση της μνήμης που καταλαμβάνει η δομή που περάστηκε ως παράμετρος,
-στην περίπτωση που το κλείσιμο πραγματοποιήθηκε επιτυχώς.*/
+// Closes the file specified in in the header_info structure
+// The function is is also responsible for freeing the memory occupied
+// by the structure passed as a parameter, in case the closure was successfully performed
+// Return 0 if successfull, -1 if failure
 int HT_CloseFile(HT_info* header_info);
 
-/*Η συνάρτηση HT_InsertEntry χρησιμοποιείται για την εισαγωγή μιας εγγραφής
-στο αρχείο κατακερματισμού. Οι πληροφορίες που αφορούν το αρχείο βρίσκονται στη
-δομή header_info, ενώ η εγγραφή προς εισαγωγή προσδιορίζεται από τη δομή record.
-Σε περίπτωση που εκτελεστεί επιτυχώς, επιστρέφετε τον αριθμό του block στο οποίο
-έγινε η εισαγωγή (blockId) , ενώ σε διαφορετική περίπτωση -1.*/
+// Insert a entry into the hashtable file, the information about the file is in the
+// header_info structure while the record to be inserted is specified by the record structure
+// Return the number of the block in which the insertion was made (blockId) if successfull, -1 if failure
 int HT_InsertEntry(HT_info* header_info, Record record);
 
-/* Η συνάρτηση αυτή χρησιμοποιείται για την εκτύπωση όλων των εγγραφών που υπάρχουν
-στο αρχείο κατακερματισμού οι οποίες έχουν τιμή στο πεδίο-κλειδί ίση με value.
-Η πρώτη δομή δίνει πληροφορία για το αρχείο κατακερματισμού, όπως αυτή είχε επιστραφεί
-από την HT_OpenIndex. Για κάθε εγγραφή που υπάρχει στο αρχείο και έχει τιμή στο πεδίο-κλειδί
-(όπως αυτό ορίζεται στην HT_info) ίση με value, εκτυπώνονται τα περιεχόμενά της (συμπεριλαμβανομένου και του πεδίου-κλειδιού). Να επιστρέφεται επίσης το πλήθος των blocks που διαβάστηκαν μέχρι να βρεθούν όλες οι εγγραφές. Σε περίπτωση επιτυχίας επιστρέφει το πλήθος των blocks που διαβάστηκαν, ενώ σε περίπτωση λάθους επιστρέφει -1.*/
+// Print all records that exist in the hashtable file that have a value in key field equal to value
+// The first structure gives information about the hashtable, as it was returned by HT_OpenFile
+// For each record that exists in the file and has a value in the id field equal to value, print it
+// Also return the number of blocks that read until all records are found
+// Return the number of readed blocks if successfull, -1 if failure
 int HT_GetAllEntries(HT_info* header_info, int value);
-
-/*Η συνάρτηση διαβάζει το αρχείο με όνομα filename και τυπώνει τα στατιστικά που αναφέρθηκαν
-προηγουμένως. Σε περίπτωση επιτυχίας επιστρέφει 0, ενώ σε περίπτωση λάθους επιστρέφει -1.*/
-int HashStatistics(char* fileName);
 
 #endif
