@@ -5,7 +5,7 @@
 
 typedef enum HP_ErrorCode{HP_OK = 0, HP_ERROR = -1}HP_ErrorCode;    // Emuration for the codes to return
 
-/* HP_info has informations about the heap file */
+// HP_info has informations about the heap file
 typedef struct{
     int blockId;        // ID of the block
     int fileDesc;       // File ID
@@ -13,7 +13,7 @@ typedef struct{
     int maxBlockRecs;   // Max amount of records a block can have
 }HP_info;
 
-/* HP_block_info has informations about the block */
+// HP_block_info has informations about the block
 typedef struct{
     int recNumber;      // Number of records a block has 
     int nextBlock;      // Points to the next block_info
@@ -23,8 +23,7 @@ typedef struct{
 κατάλληλη αρχικοποίηση ενός άδειου αρχείου σωρού με όνομα fileName.
 Σε περίπτωση που εκτελεστεί επιτυχώς, επιστρέφεται 0, ενώ σε
 διαφορετική περίπτωση -1.*/
-int HP_CreateFile(
-    char *fileName /*όνομα αρχείου*/);
+int HP_CreateFile(char *fileName);
 
 /* Η συνάρτηση HP_OpenFile ανοίγει το αρχείο με όνομα filename και
 διαβάζει από το πρώτο μπλοκ την πληροφορία που αφορά το αρχείο σωρού.
@@ -32,7 +31,7 @@ int HP_CreateFile(
 αναγκαίες για το αρχείο αυτό προκειμένου να μπορείτε να επεξεργαστείτε
 στη συνέχεια τις εγγραφές του.
 */
-HP_info* HP_OpenFile( char *fileName /* όνομα αρχείου */ );
+HP_info* HP_OpenFile(char *fileName);
 
 /* Η συνάρτηση HP_CloseFile κλείνει το αρχείο που προσδιορίζεται
 μέσα στη δομή header_info. Σε περίπτωση που εκτελεστεί επιτυχώς,
@@ -41,7 +40,7 @@ HP_info* HP_OpenFile( char *fileName /* όνομα αρχείου */ );
 που περάστηκε ως παράμετρος, στην περίπτωση που το κλείσιμο
 πραγματοποιήθηκε επιτυχώς.
 */
-int HP_CloseFile( HP_info* header_info );
+int HP_CloseFile(HP_info* header_info);
 
 /* Η συνάρτηση HP_InsertEntry χρησιμοποιείται για την εισαγωγή μιας
 εγγραφής στο αρχείο σωρού. Οι πληροφορίες που αφορούν το αρχείο
@@ -50,9 +49,7 @@ int HP_CloseFile( HP_info* header_info );
 επιτυχώς, επιστρέφετε τον αριθμό του block στο οποίο έγινε η εισαγωγή
 (blockId) , ενώ σε διαφορετική περίπτωση -1.
 */
-int HP_InsertEntry(
-    HP_info* header_info, /* επικεφαλίδα του αρχείου*/
-    Record record /* δομή που προσδιορίζει την εγγραφή */ );
+int HP_InsertEntry(HP_info* header_info, Record record);
 
 /*Η συνάρτηση αυτή χρησιμοποιείται για την εκτύπωση όλων των εγγραφών
 που υπάρχουν στο αρχείο κατακερματισμού οι οποίες έχουν τιμή στο
@@ -64,8 +61,6 @@ int HP_InsertEntry(
 διαβάστηκαν μέχρι να βρεθούν όλες οι εγγραφές. Σε περίπτωση επιτυχίας
 επιστρέφει το πλήθος των blocks που διαβάστηκαν, ενώ σε περίπτωση λάθους επιστρέφει -1.
 */
-int HP_GetAllEntries(
-    HP_info* header_info, /* επικεφαλίδα του αρχείου*/
-    int id /* η τιμή id της εγγραφής στην οποία πραγματοποιείται η αναζήτηση*/);
+int HP_GetAllEntries(HP_info* header_info, int id);
 
-#endif // HP_FILE_H
+#endif
