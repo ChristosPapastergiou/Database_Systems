@@ -8,8 +8,8 @@ How to compile and run
 ---------------------------------
 For each file the compilation is a little bit different.
 
-1 : make <filename>   
+1 : make "filename"   
 
-2 : ./build/filename_main
+2 : ./build/"filename"_main
 
-The possible filenames are : hp, ht, sht, stat
+"filename" : hp, ht, sht, stat
