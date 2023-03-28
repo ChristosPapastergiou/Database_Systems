@@ -10,8 +10,8 @@ How to compile and run
 ---------------------------------
 For each file the compilation is a little bit different.
 
-1 : make "filename"   
+    compile : make "filename"   
 
-2 : ./build/"filename"_main
+    run     : ./build/"filename"_main
 
-"filename" : hp, ht, sht, stat
+    "filename" : hp, ht, sht, stat
