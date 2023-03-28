@@ -26,11 +26,11 @@ typedef struct{
     int hashBucket;         // Storing the int value of another block (E.g. we will visit block 10 -> block 4 -> block 1 because their hash is the same)
 }SHT_block_info;
 
-/*Η συνάρτηση SHT_CreateSecondaryIndex χρησιμοποιείται για τη δημιουργία
-και κατάλληλη αρχικοποίηση ενός αρχείου δευτερεύοντος κατακερματισμού με
-όνομα sfileName για το αρχείο πρωτεύοντος κατακερματισμού fileName. Σε
-περίπτωση που εκτελεστεί επιτυχώς, επιστρέφεται 0, ενώ σε διαφορετική
-περίπτωση -1.*/
+// Create a file and proper initialization of an empty secondary hash 
+// file with the name sfileName and filename for hash file
+// It takes as input parameters the name of the file in which to
+// build the heap and the number of buckets of the hash function
+// Return 0 if successfull, -1 if failure
 int SHT_CreateSecondaryIndex(char *sfileName, int buckets, char* fileName);
 
 /* Η συνάρτηση SHT_OpenSecondaryIndex ανοίγει το αρχείο με όνομα sfileName

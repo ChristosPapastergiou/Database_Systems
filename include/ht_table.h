@@ -25,7 +25,7 @@ typedef struct{
     int hashBucket;         // Storing the int value of another block (E.g. we will visit block 10 -> block 4 -> block 1 because their hash is the same)
 }HT_block_info;
 
-// create a file and proper initialization of an empty hash file with the name fileName
+// Create a file and proper initialization of an empty hash file with the name fileName
 // It takes as input parameters the name of the file in which to
 // build the heap and the number of buckets of the hash function
 // Return 0 if successfull, -1 if failure

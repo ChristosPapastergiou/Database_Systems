@@ -182,6 +182,7 @@ int HP_GetAllEntries(HP_info* hp_info, int value){
 
   int temp = 1; // Just a temp to use to get a block (at the end of the loop this will change)
   while(1){
+    CALL_BF(BF_UnpinBlock(block));
     CALL_BF(BF_GetBlock(hp_info->fileDesc, temp, block));
     data = BF_Block_GetData(block);
 
