@@ -3,7 +3,11 @@
 
 #include <record.h>
 
-typedef enum HP_ErrorCode{HP_OK = 0, HP_ERROR = -1}HP_ErrorCode;    // Emuration for the codes to return
+// Return code emuration
+typedef enum HP_ErrorCode{
+    HP_OK = 0, 
+    HP_ERROR = -1
+}HP_ErrorCode;    
 
 // HP_info has informations about the heap file
 typedef struct{

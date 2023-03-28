@@ -3,9 +3,13 @@
 
 #include <record.h>
 
-typedef enum HT_ErrorCode{HT_OK = 0, HT_ERROR = -1}HT_ErrorCode;
+// Return code emuration
+typedef enum HT_ErrorCode{
+    HT_OK = 0,
+    HT_ERROR = -1
+}HT_ErrorCode;
 
-/* HT_info has informations about the hastable file */
+// HT_info has informations about the hastable file
 typedef struct{
     int blockId;            // ID of the block
     int fileDesc;           // File ID
@@ -15,10 +19,10 @@ typedef struct{
     int hashTable[];        // Hashtable array
 }HT_info;
 
-/* HT_block_info has informations about the block */
+// HT_block_info has informations about the block
 typedef struct{
-    int recNumber;  // Number of records a block has
-    int hashBucket; // Storing the int value of another block (E.g. we will visit block 10 -> block 4 -> block 1 because their hash is the same)
+    int recNumber;          // Number of records a block has
+    int hashBucket;         // Storing the int value of another block (E.g. we will visit block 10 -> block 4 -> block 1 because their hash is the same)
 }HT_block_info;
 
 /*Η συνάρτηση HT_CreateFile χρησιμοποιείται για τη δημιουργία

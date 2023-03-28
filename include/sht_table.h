@@ -4,9 +4,13 @@
 #include <record.h>
 #include <ht_table.h>
 
-typedef enum SHT_ErrorCode{SHT_OK = 0, SHT_ERROR = -1}SHT_ErrorCode;
+// Return code emuration
+typedef enum SHT_ErrorCode{
+    SHT_OK = 0,
+    SHT_ERROR = -1
+}SHT_ErrorCode;
 
-typedef struct {
+typedef struct{
     int blockId;            // ID of the block
     int fileDesc;           // File ID
     int lastBlockId;        // ID of the last file's block
@@ -15,9 +19,9 @@ typedef struct {
     int hashTable[];        // Hashtable array
 }SHT_info;
 
-typedef struct {
-    int recNumber;  // Number of records a block has
-    int hashBucket; // Storing the int value of another block (E.g. we will visit block 10 -> block 4 -> block 1 because their hash is the same)
+typedef struct{
+    int recNumber;          // Number of records a block has
+    int hashBucket;         // Storing the int value of another block (E.g. we will visit block 10 -> block 4 -> block 1 because their hash is the same)
 }SHT_block_info;
 
 /*Η συνάρτηση SHT_CreateSecondaryIndex χρησιμοποιείται για τη δημιουργία
@@ -25,12 +29,7 @@ typedef struct {
 όνομα sfileName για το αρχείο πρωτεύοντος κατακερματισμού fileName. Σε
 περίπτωση που εκτελεστεί επιτυχώς, επιστρέφεται 0, ενώ σε διαφορετική
 περίπτωση -1.*/
-int SHT_CreateSecondaryIndex(
-    char *sfileName, /* όνομα αρχείου δευτερεύοντος ευρετηρίου*/
-    int buckets, /* αριθμός κάδων κατακερματισμού*/
-    char* fileName /* όνομα αρχείου πρωτεύοντος ευρετηρίου*/);
-
-
+int SHT_CreateSecondaryIndex(char *sfileName, int buckets, char* fileName);
 
 /* Η συνάρτηση SHT_OpenSecondaryIndex ανοίγει το αρχείο με όνομα sfileName
 και διαβάζει από το πρώτο μπλοκ την πληροφορία που αφορά το δευτερεύον

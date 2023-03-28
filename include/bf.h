@@ -5,9 +5,9 @@
 extern "C" {
 #endif
 
-#define BF_BLOCK_SIZE 512      // Block size in bytes
-#define BF_BUFFER_SIZE 100     // Maximum block number in memory
-#define BF_MAX_OPEN_FILES 100  // Maximum number of open files
+#define BF_BLOCK_SIZE 512       // Block size in bytes
+#define BF_BUFFER_SIZE 100      // Maximum block number in memory
+#define BF_MAX_OPEN_FILES 100   // Maximum number of open files
 
 typedef enum BF_ErrorCode{
   BF_OK,
