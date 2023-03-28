@@ -12,6 +12,6 @@ For each file the compilation is a little bit different.
 
     compile : make "filename"   
 
-    run : ./build/"filename"_main
+    run     : ./build/"filename"_main
 
     "filename" : hp, ht, sht, stat
