@@ -133,15 +133,21 @@ int HashStatistics(char* fileName){
         
         CALL_OR_DIE(BF_UnpinBlock(block));
 
-        if(block_info->hashBucket == -1) break;
+        if(block_info->hashBucket == -1){
+          break;
+        }
 
         temp = block_info->hashBucket;
         CALL_OR_DIE(BF_GetBlock(fileDesc, temp, block));
       }
     }
-    if(maximumTemp > maximumRecs) maximumRecs = maximumTemp;  // Keeping the maximum 
-      
-    if(minimumTemp < minimumRecs) minimumRecs = minimumTemp;  // Keeping the minimum
+
+    if(maximumTemp > maximumRecs){
+      maximumRecs = maximumTemp;  // Keeping the maximum 
+    }
+    if(minimumTemp < minimumRecs){
+      minimumRecs = minimumTemp;  // Keeping the minimum
+    }
   }
   averageRecs = (double) averageRecs/numBuckets;
 
@@ -152,7 +158,9 @@ int HashStatistics(char* fileName){
 
     int temp = hashTable[i];
 
-    if(temp == -1) continue;  // Need to check if the block exists
+    if(temp == -1){
+      continue;  // Need to check if the block exists
+    }
 
     CALL_OR_DIE(BF_GetBlock(file, temp, block));
     data = BF_Block_GetData(block);
@@ -174,7 +182,9 @@ int HashStatistics(char* fileName){
 
       CALL_OR_DIE(BF_UnpinBlock(block));
 
-      if(block_info->hashBucket == -1) break;
+      if(block_info->hashBucket == -1){
+        break;
+      }
 
       temp = block_info->hashBucket;
       CALL_OR_DIE(BF_GetBlock(fileDesc, temp, block));
