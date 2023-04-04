@@ -279,12 +279,16 @@ int SHT_SecondaryGetAllEntries(HT_info* ht_info, SHT_info* sht_info, char* name)
 
     CALL_OR_DIE(BF_UnpinBlock(block));
 
-    if(block_info->hashBucket == -1) break;
+    if(block_info->hashBucket == -1){
+      break;
+    }
     
     temp = block_info->hashBucket;  // Giving the next we point
   }
 
-  if(noEntry == 0) printf("There is no entry with this name.\n");
+  if(noEntry == 0){
+    printf("There is no entry with this name.\n");
+  }
   
   free(array);
   BF_Block_Destroy(&block);

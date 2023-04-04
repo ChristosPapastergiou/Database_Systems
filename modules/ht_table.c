@@ -228,6 +228,12 @@ int HT_GetAllEntries(HT_info* ht_info, int value){
     for(int i = 0; i < block_info->recNumber; i++){
       if(record->id == value){
         printRecord(*record);
+
+        CALL_OR_DIE(BF_UnpinBlock(block));  // Unpin for not having memory leaks
+        BF_Block_Destroy(&block);
+
+        return total;
+
         noEntry++;
       }
       record = data + sizeof(Record) * (i + 1); // Going to the next record of the block
@@ -236,13 +242,18 @@ int HT_GetAllEntries(HT_info* ht_info, int value){
 
     CALL_OR_DIE(BF_UnpinBlock(block));
 
-    if(block_info->hashBucket == -1) break;
+    if(block_info->hashBucket == -1){
+      break;
+    }
     
     temp = block_info->hashBucket;    // Going from hashbucket to hashbucket until its over (hashbucket == -1)
   }
 
-  if(noEntry == 0) printf("There is no entry with this id.\n");
+  if(noEntry == 0){
+    printf("There is no entry with this id.\n");
+  }
   
   BF_Block_Destroy(&block);
+
   return total;
 }

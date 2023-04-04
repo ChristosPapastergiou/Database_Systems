@@ -191,6 +191,12 @@ int HP_GetAllEntries(HP_info* hp_info, int value){
     for(int i = 0; i < block_info->recNumber; i++){
       if(record->id == value){
         printRecord(*record);
+        
+        CALL_BF(BF_UnpinBlock(block));  // Unpin for not having memory leaks
+        BF_Block_Destroy(&block);
+
+        return total;
+        
         noEntry++;
       }
       record = data + sizeof(Record) * (i + 1); // Going to the next record of the block
@@ -199,12 +205,16 @@ int HP_GetAllEntries(HP_info* hp_info, int value){
 
     CALL_BF(BF_UnpinBlock(block));  // Unpin for not having memory leaks
 
-    if(block_info->nextBlock == 0) break;
+    if(block_info->nextBlock == 0){
+      break;
+    }
 
     temp = block_info->nextBlock;   // Going to the next block each time
   }
 
-  if(noEntry == 0) printf("There is no entry with this id.\n");
+  if(noEntry == 0){
+    printf("There is no entry with this id.\n");
+  }
 
   BF_Block_Destroy(&block);
   
