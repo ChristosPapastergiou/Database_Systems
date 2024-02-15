@@ -8,7 +8,6 @@ Simulate a Database System in block level implemented with with different techni
 ---------------------------------
 How to compile and run
 ---------------------------------
-For each file the compilation is a little bit different.
 
     compile : make "filename"   
 
