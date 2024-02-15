@@ -1,16 +1,17 @@
 # Database Systems
 
-Simulate a Database System in block level implemented with with different techniques. 
+Simulate a Database System in block level implemented with different techniques. 
 
-- Those techniques are : 1. Heap File, 2. HashTable, 3. Secondary HashTable
-- There is one more file that shows the statistics of hashtable and secondary hashtable. There is a little bit of difference.
+- Techniques : 
+    - Heap File
+    - HashTable
+    - Secondary HashTable
 
----------------------------------
-How to compile and run
----------------------------------
+- In order to have some statistics for hashtable and secondary hashtable there is the stat file.
 
-    compile : make "filename"   
+# Compilation & Run
 
-    run     : ./build/"filename"_main
+In order to compile and run a technique you must choose (filename) : hp, ht, sht, stat 
 
-    "filename" : hp, ht, sht, stat
+    compile : make filename
+    run     : ./build/filename_main
